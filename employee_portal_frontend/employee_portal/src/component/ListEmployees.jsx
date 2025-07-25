@@ -1,6 +1,18 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { listEmployees } from '../service/EmployeeServie'
 
 const ListEmployees = () => {
+
+  const[employees, setEmployees] = useState([])
+
+  useEffect(()=> {
+    listEmployees().then((response) => {
+      setEmployees(response.data)
+    }).catch(error => {
+      console.log(error);
+    })
+  }, [])
+
     const tempData = [
         {
   "id": 101,
@@ -19,11 +31,39 @@ const ListEmployees = () => {
   "domain": "Technology",
   "contact": "987-654-3210"
 }
-
-
-    ]
+]
   return (
-    <div>ListEmployees</div>
+    <div className='container'>
+      <h2>List of Employees</h2> 
+      <table className='table table-striped table-bordered'>
+        <thead>
+          <tr>
+            <th>Employee Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email Id</th>
+            <th>Location</th>
+            <th>Domain</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            employees.map(employee => 
+               <tr key={employee.id}>
+                <td>{employee.id}</td>
+                <td>{employee.firstName}</td>
+                <td>{employee.lastName}</td>
+                <td>{employee.emailId}</td>
+                <td>{employee.location}</td>
+                <td>{employee.domain}</td>
+                <td>{employee.contact}</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>
+    </div>
   )
 }
 
