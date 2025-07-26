@@ -189,7 +189,7 @@ const Employee = () => {
                                 </input>
                                 {errors.contact && <div className='invalid-feedback'>{errors.contact}</div>}
                             </div>
-                            <button className='btn btn-success' onClick={saveOrUpdateEmployee}>Save</button>
+                            <button className='btn btn-success md-2' onClick={saveOrUpdateEmployee}>Save</button>
                         </form>
                     </div>
                 </div>

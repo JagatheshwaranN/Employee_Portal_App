@@ -39,8 +39,8 @@ const ListEmployees = () => {
     
   return (
     <div className='container'>
-      <h2>List of Employees</h2> 
-      <button className='btn btn-primary mb-2' onClick={addEmployee}>Add Employee</button>
+      <h2>Employee Details</h2> 
+      <button className='btn btn-primary mb-2 btn-sm' onClick={addEmployee}>Add Employee</button>
       <table className='table table-striped table-bordered'>
         <thead>
           <tr>
@@ -66,8 +66,8 @@ const ListEmployees = () => {
                 <td>{employee.domain}</td>
                 <td>{employee.contact}</td>
                 <td>
-                  <button className='btn btn-info' onClick={()=>updateEmployee(employee.id)}>Update</button>
-                  <button className='btn btn-danger' onClick={()=>removeEmployee(employee.id)}
+                  <button className='btn btn-info btn-sm' onClick={()=>updateEmployee(employee.id)}>Update</button>
+                  <button className='btn btn-danger btn-sm' onClick={()=>removeEmployee(employee.id)}
                     style={{marginLeft: '10px'}}>Delete</button>
                 </td>
               </tr>
