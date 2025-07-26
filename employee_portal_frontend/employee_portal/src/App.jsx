@@ -15,6 +15,7 @@ function App() {
         <Route path='/' element = {<ListEmployees />} ></Route>
         <Route path='/employees' element = {<ListEmployees />} ></Route>
         <Route path='/addEmployee' element = {<Employee />} ></Route>
+        <Route path='/updateEmployee/:id' element = {<Employee />} ></Route>
       </Routes>
       <Footer />
       </BrowserRouter>

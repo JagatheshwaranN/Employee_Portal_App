@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { listEmployees } from '../service/EmployeeService'
+import { deleteEmployee, listEmployees } from '../service/EmployeeService'
 import { useNavigate } from 'react-router-dom'
 
 const ListEmployees = () => {
@@ -9,36 +9,34 @@ const ListEmployees = () => {
   
 
   useEffect(()=> {
+    getAllEmployees();
+  }, [])
+
+  function getAllEmployees() {
     listEmployees().then((response) => {
       setEmployees(response.data)
     }).catch(error => {
       console.log(error);
     })
-  }, [])
+  }
 
   function addEmployee() {
     navigator('/addEmployee');
   }
 
-    const tempData = [
-        {
-  "id": 101,
-  "firstName": "Alice",
-  "lastName": "Johnson",
-  "emailId": "alice.johnson@example.com",
-  "location": "New York",
-  "domain": "Finance",
-  "contact": "123-456-7890"
-}, {
-  "id": 102,
-  "firstName": "Bob",
-  "lastName": "Smith",
-  "emailId": "bob.smith@example.com",
-  "location": "San Francisco",
-  "domain": "Technology",
-  "contact": "987-654-3210"
-}
-]
+  function updateEmployee(id) {
+    navigator(`/updateEmployee/${id}`)
+  }
+
+  function removeEmployee(id) {
+    console.log(id);
+    deleteEmployee(id).then((response) => {
+      getAllEmployees();
+    }).catch(error => {
+      console.error(error);
+    })
+  }
+    
   return (
     <div className='container'>
       <h2>List of Employees</h2> 
@@ -53,6 +51,7 @@ const ListEmployees = () => {
             <th>Location</th>
             <th>Domain</th>
             <th>Contact</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -66,6 +65,11 @@ const ListEmployees = () => {
                 <td>{employee.location}</td>
                 <td>{employee.domain}</td>
                 <td>{employee.contact}</td>
+                <td>
+                  <button className='btn btn-info' onClick={()=>updateEmployee(employee.id)}>Update</button>
+                  <button className='btn btn-danger' onClick={()=>removeEmployee(employee.id)}
+                    style={{marginLeft: '10px'}}>Delete</button>
+                </td>
               </tr>
             )
           }
